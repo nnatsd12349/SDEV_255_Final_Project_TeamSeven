@@ -1,0 +1,24 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+<body>
+    <% const name = 'Tarzan' %><!--this works now even though intellisense doens't see it-->
+    <%- include('./partials/nav.ejs') %>
+    <%= name %>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, maiores.</p><hr>
+    <div class="courselist">
+    <% if (courses.length > 0 ) { %>
+        <% courses.forEach(course => { %>
+            <tr>
+                <td><%=course.name%>,</td>
+                <td><%=course.desc%>,</td>
+                <td><%=course.subject%>,</td>
+                <td><%=course.cred%></td>
+            </tr><br>
+            <% }) %>
+        <% } else { %>
+                <p>There are no courses to display...</p>
+            <% } %><!--EJS does serverside rendering of dynamic pages-->
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>
