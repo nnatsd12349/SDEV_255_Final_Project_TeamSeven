@@ -1,0 +1,71 @@
+/*Stylesheet for website*/
+
+body {
+    color: #666666;
+    background-color: #4F6D93;
+    background-image: linear-gradient(to bottom, #FFFFFF, #4F6D93);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+/*wrapper tag for webpages*/ 
+#wrap {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-color: white;
+    min-width: 960px;
+    max-width: 2048px;
+    box-shadow: 3px 3px 3px #333333;
+}
+
+/*header bar accross top of website*/
+header {
+    background-color: #003006;
+    color: #FFFFFF;
+    background-image: url(logo.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    text-align: center;
+    
+    height: 60px;
+    padding-top: 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: 400;
+}
+
+/*Navigation bar*/
+#nav {
+    background-color: green;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+}
+#nav li{margin: 20px;display: inline}
+#nav ul {
+    padding-bottom: 15px;
+    margin: 0;
+    list-style-type: none;
+    font-size: 1.2em;
+}
+nav a{color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px 10px;}
+nav a:link {color: #ffffff;}
+nav a:visited {color: #ffffff;}
+nav a:hover {color: black;background-color: #ddd;}
+nav a.active{color:black;background-color: #3399CC;}
+.hlink {
+    text-decoration: none;
+    color: #F4F4F4;
+}
+.hlink a:link {color:#F4F4F4}
+.hlink a:visited {color:#F4F4F4}
+/*Navigation bar end*/
