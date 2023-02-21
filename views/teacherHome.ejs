@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!--Header for page-->
+<%- include('./partials/head.ejs') %>
+
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <!--header/link to homepage-->
+    <header>
+        <h1 class="hlink">Teacher Home Page</h1>
+    </header>
+
+    <div id="wrap"><!--Division in webpage-->
+
+        <!--Navigation links for different webpages on website-->
+        <nav>
+            <div id="nav">
+                <ul>
+                    <li><a href="teacherHome.html" class="active">Scheduled</a></li>
+                    <li><a href="index.html" class="more">Explore</a></li>
+                    <li><a href="index.html" class="more">Past Classes</a></li>
+                    <li><a href="index.html" class="more">Create Course</a></li>
+                    <li><a href="index.html" class="more">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        //teacher can CREATE course, DELETE course (from explore)(popup alert: confirm/cancel)<br>
+        //basically administrative api access to database<br>
+        //button to login to add courses or exercise faculty adminstrative functions such as CREATE, UPDATE, or DELETE courses
+    </div>
+
+    <%- include('./partials/foot.ejs') %>
+</body>
+    
+</html>

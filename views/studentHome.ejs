@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Header for page-->
+<%- include('./partials/head.ejs') %>
+
+<!--Body of webpage-->
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <!--header/link to homepage-->
+    <header>
+        <h1 class="hlink">Student Home Page</h1>
+    </header>
+
+    <div id="wrap"><!--Division in webpage-->
+
+        <!--Navigation links for different webpages on website-->
+        <nav>
+            <div id="nav">
+                <ul>
+                    <li><a href="studentHome.html" class="active">Scheduled</a></li>
+                    <li><a href="index.html" class="more">Explore</a></li>
+                    <li><a href="index.html" class="more">Past Grades</a></li>
+                    <li><a href="index.html" class="more">Enroll Now</a></li>
+                    <li><a href="index.html" class="more">Check Out || Logout <br> (if nothing in cart)</a></li>
+                </ul>
+            </div>
+        </nav>
+        //load iframe for scheduled, explore, past grades<br>
+        //send to enroll page if select enroll (explore page with add course to scheduled)<br>
+        //Checkout - use test payment processor API to pay for classes?  (too much work?)<br>
+        //student landing page can add course to self and save changes or drop course and save changes
+    </div>
+    
+    <%- include('./partials/foot.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <h3>Only You...can prevent interest and/or humor famine.</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, maiores.</p><hr>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic ipsa exercitationem quasi dolor quidem, expedita, repudiandae labore alias dignissimos aspernatur sapiente neque voluptates ad veniam ducimus eligendi, quod debitis omnis rerum. Magni obcaecati reprehenderit vel doloribus neque earum non aspernatur iusto excepturi necessitatibus sint, fuga recusandae ad iste laboriosam sequi beatae quis suscipit accusamus voluptates enim deleniti eligendi nam. Modi voluptas itaque accusantium ad nemo! Iure assumenda nihil nulla incidunt quasi molestias perspiciatis consectetur aspernatur ullam dolores?</p>
+    <hr>
+    <div class="create-blarg content">
+        <from>
+            <label for="title">Name:</label>
+            <input type="text" id="title" required>*<br>
+            <label for="snippette">Email:</label>
+            <input type="text" id="snippette" required>*<br>
+            <label for="body">Message:</label>
+            <textarea id="body" required></textarea>*
+            <button>Send</button><!--need to add validation--><br>
+            <small>*Indicates a required field.</small>
+            <!--could actually save this info and fire an email from an smtp server-->
+        </from>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>

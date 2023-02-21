@@ -1,0 +1,29 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+<body>
+    <!--this works now even though intellisense doens't see it-->
+    <%- include('./partials/nav.ejs') %>
+    <p>You are our <%= visitor %> visitor!</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, maiores.</p><hr>
+    <div class="courselist" id="wrap">
+    <% if (courses.length > 0 ) { %>
+        <% courses.forEach(course => { %>
+            <OL><LI><%=course.name%>
+            <UL>
+                <LI><%=course.desc%></LI>
+                <LI><%=course.subject%>, <%=course.cred%> Credits</LI>
+            </UL><br>
+            </LI></OL>
+            <% }) %>
+        <% } else { %>
+                <p>There are no courses to display...</p>
+            <% } %><!--EJS does serverside rendering of dynamic pages--><br>
+            //need to move this to Learn page for full list of courses
+    </div>
+
+    
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>
+<!--git config --global user.email "you@example.com"-->
+<!--git config --global user.name "Your Name"-->
