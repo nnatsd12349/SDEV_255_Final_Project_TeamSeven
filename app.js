@@ -1,13 +1,33 @@
 const express = require('express');
 const _ = require('lodash');
+const morgan = require('morgan');
 //express app
 const app = express();
+const mongoose = require('mongoose');
 
+
+//to write to SDEV255DB db, add "SDEV255DB" into the uri as shown here:
+//const DBURI ='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/SDEV255DB?retryWrites=true&w=majority'
+//to write to test db remove the "SDEV255DB" after the first single forward slash as show here
+//const DBURI ='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/?retryWrites=true&w=majority'
+//connect to mongoDB
+const DBURI='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/?retryWrites=true&w=majority';
+
+mongoose.connect(DBURI, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result)=> {
+        app.listen(80);
+        console.log('connected to db');})
+    .catch((err)=>console.log(err));
 //regularly used view engine
 app.set('view engine', 'ejs');
 
 //instream parser
-app.listen(80);
+//app.listen(80);
+
+app.use(express.static('Assets'));//you must explicitly state what files are publicly accessible
+app.use(morgan('dev'));
+
+
 
 //middleware to load css
 app.use('/public', express.static('public'));
@@ -22,6 +42,7 @@ app.get('/', (req, res) =>{
     ]
     const visitor = _.random(100000, 1000000000);
     res.render('index', {tittle: 'Home', courses: courses, visitor: visitor});
+    
 });
 
 app.get('/courses', (req, res) =>{
