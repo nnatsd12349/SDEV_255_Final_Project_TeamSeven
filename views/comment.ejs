@@ -1,0 +1,22 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <h3>Only You...can prevent humor hunger.</h3>
+    <p>If you would like to leave a comment to tell us how we are doing, feel free. Or poetry. Or transcripts of postcards from a Travelling Uncle.</p><hr>
+    <div class="create-comment content">
+        <from>
+            <label for="titl">Title*:</label>
+            <input type="text" id="title" required><br>
+            <label for="snip">Snippet*:</label>
+            <input type="text" id="snippet" required><br>
+            <label for="body">Body*:</label>
+            <textarea id="body" required></textarea><br>
+            <button>Send</button><!--need to add validation--><br>
+            <small>*Indicates a required field.</small>
+            <!--could actually save this info and fire an email from an smtp server-->
+        </from>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>

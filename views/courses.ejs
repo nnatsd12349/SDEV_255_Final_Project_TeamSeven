@@ -2,11 +2,25 @@
     <%- include('./partials/head.ejs') %>
 <body>
     <%- include('./partials/nav.ejs') %>
-    <h2>About Us</h2>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, maiores.</p>
-    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, laudantium enim recusandae veritatis eveniet consequatur sapiente iusto, nostrum temporibus dicta officia explicabo cupiditate ut vero quaerat at tempore optio nobis quae assumenda mollitia, esse beatae ratione suscipit! Soluta sed odit eum suscipit modi, aperiam illum officia accusantium distinctio eaque aspernatur.</small>
-    <br>//this will load a template of the course search page which is public and with no DELETE/ADD/CREATE functionality enabled
-    <br>//it just lists all courses and you can click on it for an indepth description (maybe overdoing the project with that last bit)
+    <h2>Course Catalog</h2>
+    <p>Below you will find a complete list of all courses offered down in Fragglerock.</p>
+    <small>Courses are listed in ascending order by level.</small>
+    <div class="courselist">
+        <table>
+            <tr><center><h3>Database Inventory of Degree Program Courses</h3></center></tr>
+            <tr><td> </td><td> </td><td>Dept</td><td>Level</td><td>Preqs</td><td>Credits</td><hr></tr>
+    <% if (courses.length > 0 ) { %>
+        <% courses.forEach(course => { %>
+           <tr><td><%=course.name%>:</td></tr>
+                <tr><td><p><%=course.desc%></p></td></tr>
+                <td><hr></td><td><hr></td><td><%=course.dept%>,<hr></td><td><%=course.levl%>,<hr></td><td><%=course.preq%>,<hr></td><td><%=course.cred%><hr></td>
+            </tr>
+            <% }) %>
+        <% } else { %>
+                <p>There are no database courses to display...</p>
+            <% } %><!--EJS does serverside rendering of dynamic pages-->
+        </table>
+        </div>
     <%- include('./partials/foot.ejs') %>
 </body>
 </html>

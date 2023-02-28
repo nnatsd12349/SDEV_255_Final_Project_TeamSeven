@@ -4,14 +4,15 @@ const morgan = require('morgan');
 //express app
 const app = express();
 const mongoose = require('mongoose');
-
+const Course = require('./models/course');
+const Comment = require('./models/comment');
 
 //to write to SDEV255DB db, add "SDEV255DB" into the uri as shown here:
 //const DBURI ='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/SDEV255DB?retryWrites=true&w=majority'
 //to write to test db remove the "SDEV255DB" after the first single forward slash as show here
 //const DBURI ='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/?retryWrites=true&w=majority'
 //connect to mongoDB
-const DBURI='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/?retryWrites=true&w=majority';
+const DBURI='mongodb+srv://stides:Seventy7@SDEV255.syrfobv.mongodb.net/SDEV255DB?retryWrites=true&w=majority';
 
 mongoose.connect(DBURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result)=> {
@@ -47,9 +48,30 @@ app.get('/', (req, res) =>{
 
 app.get('/courses', (req, res) =>{
     //res.send('<p>about page</p>');
-    res.render('courses', {tittle: 'Learn'});
+    Course.find().sort({levl: 1})
+        .then((result)=>{
+            res.render('courses', {tittle: 'Learn', courses: result});
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 });
-
+app.get('/add-course', (req, res)=>{
+    const course = new Course({
+        name: 'change me',
+        desc: 'change my text and go to my url to insert into db.',
+        dept: 'DBDB',
+        levl: 147,
+        preq: 1,
+        cred: 4
+    });
+    course.save()
+        .then((result)=>{
+            res.send(result)
+        }).catch((err)=>{
+            console.log(err);
+        });
+});
 app.get('/loginDashboard', (req, res) =>{
     //res.send('<p>about page</p>');
     res.render('loginDashboard', {tittle: 'Login'});
@@ -65,9 +87,9 @@ app.get('/teacherHome', (req, res) =>{
     res.render('teacherHome', {tittle: 'Faculty'});
 });
 
-app.get('/blarg', (req, res) =>{
+app.get('/comment', (req, res) =>{
     //res.send('<p>about page</p>');
-    res.render('blarg', {tittle: 'Post'});
+    res.render('comment', {tittle: 'Post'});
 });
 
 
