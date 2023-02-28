@@ -1,0 +1,22 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <h3>Enroll today!</h3>
+    <p>A journey starts with one fraggle foot.</p><hr>
+    <div class="create-comment content">
+        <form action="/enroll" method="POST" class="">
+            <label for="usrn">User Name*:</label>
+            <input type="text" id="usrn" name="usrn" required><br>
+            <label for="pswd">Snippet*:</label>
+            <input type="text" id="pswd" name="pswd" required><br>
+            <label for="auth">Faculty?*:</label>
+            <input id="auth" name="auth" required></input><br>
+            <button>Create Login</button><!--need to add validation--><br>
+            <small>*Indicates a required field.  Enter T for Teacher or S for Student in Faculty field.</small>
+            <!--could actually save this info and fire an email from an smtp server-->
+        </form>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+</html>

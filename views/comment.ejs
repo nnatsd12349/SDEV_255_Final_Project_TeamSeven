@@ -4,19 +4,51 @@
     <%- include('./partials/nav.ejs') %>
     <h3>Only You...can prevent humor hunger.</h3>
     <p>If you would like to leave a comment to tell us how we are doing, feel free. Or poetry. Or transcripts of postcards from a Travelling Uncle.</p><hr>
+    <a class="saySomeLink"><center>Open</center> Add Entry Form</a>
     <div class="create-comment content">
-        <from>
+        <form action="/comment" method="POST" class="saysomethin">
             <label for="titl">Title*:</label>
-            <input type="text" id="title" required><br>
+            <input type="text" id="titl" name="titl" required><br>
             <label for="snip">Snippet*:</label>
-            <input type="text" id="snippet" required><br>
+            <input type="text" id="snip" name="snip" required><br>
             <label for="body">Body*:</label>
-            <textarea id="body" required></textarea><br>
-            <button>Send</button><!--need to add validation--><br>
+            <textarea id="body" name="body" required></textarea><br>
+            <button>Add This</button><!--need to add validation--><br>
             <small>*Indicates a required field.</small>
             <!--could actually save this info and fire an email from an smtp server-->
-        </from>
+        </form>
     </div>
+    <div class="commentlist">
+        <table>
+            <tr><h3>What Fraggles are saying...</h3></tr><br>
+    <% if (comments.length > 0 ) { %>
+        <% comments.forEach(comment => { %>
+            <a class="single" href="/comment/<%= comment._id %>">
+                <h3><%=comment.titl%></h3>
+                <p><%=comment.snip%></p>
+            </a>
+            <hr>
+            <% }) %>
+        <% } else { %>
+                <p>There are no comments stored in the database for us to display...<br>You can be the first!</p>
+            <% } %><!--EJS does serverside rendering of dynamic pages-->
+        </table>
+        </div>
+        <script>
+        const fragglevoice= document.querySelector('a.saySomeLink');
+        const saysomethin = document.querySelector('form.saysomethin');
+
+        //this is now working exactly like I wanted: shows the updating form
+        fragglevoice.addEventListener('click', ()=>{
+            
+            if(saysomethin.style.display != 'block'){
+                saysomethin.style.display = 'block';
+            }else{
+                saysomethin.style.display = 'none';
+            }
+            console.log('clicked - debug me')
+        })
+        </script>
     <%- include('./partials/foot.ejs') %>
 </body>
 </html>

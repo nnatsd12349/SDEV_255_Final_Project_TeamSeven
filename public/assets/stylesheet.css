@@ -56,13 +56,13 @@
     }
 
     /* index styles */
-    .blargs a{
+    .comments a{
       display: block;
       margin: 40px 0;
       padding-left: 30px;
       border-left: 6px solid crimson;
     }
-    .blargs a:hover h3{
+    .commentss a:hover h3{
       color: crimson;
     }
 
@@ -81,7 +81,36 @@
       cursor: pointer;
       box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
     }
-
+    .edit{
+      position: absolute;
+      top: 0;
+      right: 70;
+      border-radius: 50%;
+      padding: 8px;
+    }
+    .edit:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .editform{
+      display: none;
+    }
+    .saySomeLink{
+      float: right;
+      border-radius: 50%;
+      padding: 12px;
+      text-shadow: #4F6D93;
+      outline-width: 1cap;
+      border-color: #4F6D93;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .saySomeLink:hover{
+      cursor: pointer;
+      box-shadow: 2px 3px 4px rgba(0,0,0,0.2);
+    }
+    .saysomethin{
+      display: none;
+    }
     /* create styles */
     .create-comment form{
       max-width: 400px;

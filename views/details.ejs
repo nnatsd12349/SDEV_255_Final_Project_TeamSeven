@@ -1,0 +1,80 @@
+<html>
+   <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <!--This styles.css needs double dot to say parent parent directory becuase it is relative to inside /blargs with single dot-->
+    <link rel="StyleSheet" href="../styles.css">
+    <div class="details content">
+        <h2><%= comment.titl %></h2>
+        <h4><%= comment.snip %></h4>
+        <div>
+            <p><%= comment.body %></p>
+        </div>
+        <a class="delete" data-doc="<%= comment._id %>">Trash</a>
+        <a class="edit" data-doc2="<%= comment._id %>">Edit</a>
+        <div class="create-comment content">
+            <form action="/comment/<%=comment._id%>" method="PUT" class="editform" >
+                <!--need to fix method and route-->
+                <label for="titl">Title*:</label>
+                <input type="text" id="titl" name="titl" required><br>
+                <label for="snip">Snippet*:</label>
+                <input type="text" id="snip" name="snip" required><br>
+                <label for="body">Body*:</label>
+                <textarea id="body" name="body" required></textarea><br>
+                <button id="btn">Update This</button><!--need to add validation--><br>
+                <small>*Indicates a required field.</small>
+                <!--could actually save this info and fire an email from an smtp server-->
+            </form>
+        </div>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+    <script>
+        const trashcan = document.querySelector('a.delete');
+        trashcan.addEventListener('click', (e)=>{
+            const endpoint=`/comment/${trashcan.dataset.doc}`;//not single quotes, these are back ticks below the esc key
+            //this thing right here is ^^^ called a template string
+            //because this is rendered and passed back from client-side it is called AJAX
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response)=>response.json())
+            //.then((data)=>console.log(data))
+            .then((data)=>window.location.href = data.redirect)
+            .catch(err=>console.log(err));
+            console.log('clicked-eventhandleractive');
+        })
+
+        const whiteboard= document.querySelector('a.edit');
+        const editform = document.querySelector('form.editform');
+
+        //this is now working exactly like I wanted: shows the updating form
+        whiteboard.addEventListener('click', ()=>{
+            
+            if(editform.style.display != 'block'){
+                editform.style.display = 'block';
+            }else{
+                editform.style.display = 'none';
+            }
+            console.log('clicked - debug me')
+        })
+/*this didn't work, but I will leave it here incase I get frustrated with new method
+        const change = document.querySelector('button.btn');
+        change.addEventListener('click', (e)=>{
+            const endpoint=`/comment/${change.dataset.doc2}`;//not single quotes, these are back ticks below the esc key
+            //this thing right here is ^^^ called a template string
+            //because this is rendered and passed back from client-side it is called AJAX
+            fetch(endpoint, {
+                method: 'PUT'
+            })
+            .then((response)=>response.json())
+            //.then((data)=>console.log(data))
+            .then((data)=>window.location.href = data.redirect)
+            .catch(err=>console.log(err));
+            console.log('clicked-eventhandleractive');
+        })
+        **/
+    </script>
+   
+
+</body>
+</html>
