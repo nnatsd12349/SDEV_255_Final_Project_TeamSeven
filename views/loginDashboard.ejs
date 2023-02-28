@@ -5,7 +5,28 @@
     <%- include('./partials/nav.ejs') %>
     <div id="wrap">
     //submit form with UN and Password<br>
-    //either to studentHome.ejs or teacherHome.ejs
+    //either to studentHome.ejs or teacherHome.ejs<br>
+    
+    <style>
+    /* Bordered form */
+    form {
+        border: 3px solid #f1f1f1;
+    }
+    </style>
+
+    <!--Login form for teachers and students-->
+    <div class="login">
+        <h1>Login</h1>
+        <form action="" method="post">
+            <label for="username">
+            </label>
+            <input type="text" name="username" placeholder="Username" id="username" required>
+            <label for="password">
+            </label>
+            <input type="password" name="password" placeholder="Password" id="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
     </div>
     <%- include('./partials/foot.ejs') %>
 </body>
