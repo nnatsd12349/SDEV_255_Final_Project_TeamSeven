@@ -8,23 +8,99 @@
     //either to studentHome.ejs or teacherHome.ejs<br>
     
     <style>
-    /* Bordered form */
-    form {
-        border: 3px solid #f1f1f1;
-    }
+        /* Bordered form */
+        form {
+            border: 3px solid #f1f1f1;
+            display: block;
+            width: 100%;
+            padding: 2em;
+        }
+
+        /*import font style*/
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,300,600);
+
+        /*login form as a whole*/
+        .login {
+            width: 40%;
+            min-width: 320px;
+            max-width: 475px;
+            background: #fff;
+            position: relative;
+            top: 50%;
+            left: 30%;
+            box-shadow: 1px;
+        }
+
+        /*text for box*/
+        h2 {
+            width: 104%;
+            color: lighten(grey, 20%);
+            font-family: 'open sans condensed';
+            font-size: 1.35em;
+            display: block;
+            background: lightblue;
+            text-transform: uppercase;
+            padding: .75em 1em .75em 1.5em;
+            box-shadow:inset 0px 1px 1px fadeout(white, 95%);
+            border: 1px solid darken( grey, 5%);
+            margin: 0;
+            font-weight: 200;
+        }
+
+        /*input password and username*/
+        input {
+            display: block;
+            margin: auto auto;
+            width: 100%;
+            margin-bottom: 2em;
+            padding: .5em 0;
+            border: none;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 1.25em;
+            color: #757575;
+        }
+        input.focus {
+            outline: none;
+        }
+
+        /*button to submit form*/
+        .btn {
+            display: inline-block;
+            background: blue;
+            border: 1px solid darken(blue, 5%);
+            padding: .5em 2em;
+            color: white;
+            margin-right: .5em;
+            box-shadow: inset 0px 1px 0px fadeout(white, 80%); 
+        }
+        .btn:hover{background: lighten(blue, 5%)}
+        .btn:active{background: blue;}
+        .btn:focus{outline:none;}
+
+        /*forgot password?*/
+        .forgot {
+            color: lighten(blue, 10%);
+            line-height: .5em;
+            position: relative;
+            top: 2.5em;
+            text-decoration: none;
+            font-size: .75em;
+            margin:0;
+            padding: 0;
+            float: right;
+        }
+        .forgot:hover{color:darken(blue, 5%);}
+
     </style>
 
     <!--Login form for teachers and students-->
     <div class="login">
-        <h1>Login</h1>
-        <form action="" method="post">
-            <label for="username">
-            </label>
-            <input type="text" name="username" placeholder="Username" id="username" required>
-            <label for="password">
-            </label>
-            <input type="password" name="password" placeholder="Password" id="password" required>
-            <input type="submit" value="Login">
+        <h2>Login to your account</h2>
+        <form>
+            <input type="text" title="username" placeholder="username" />
+            <input type="password" title="password" placeholder="password" />
+            <button type="submit" class="btn">Login</button>
+            <a class="forgot" href="#">Forgot Password?</a>
         </form>
     </div>
     </div>
