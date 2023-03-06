@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const Course = require('./models/course');
 const Comment = require('./models/comment');
 const Login = require('./models/login');
-
+var comment = Comment.find({});
 //to write to SDEV255DB db, add "SDEV255DB" into the uri as shown here:
 //const DBURI ='mongodb+srv://stides:Seventy7@sdev255.syrfobv.mongodb.net/SDEV255DB?retryWrites=true&w=majority'
 //to write to test db remove the "SDEV255DB" after the first single forward slash as show here
@@ -224,28 +224,25 @@ app.delete('/comment/:id', (req, res)=>{
         res.json({redirect: '/comment'})
     })
 })
-//my puts are defaulting into get route... but why?
-app.put('/comment/:id', (req, res)=>{
-    console.log('put entered - debug me')
-    const id = req.params.id;
-    Comment.findByIdAndUpdate(id)
-    //because AJAX request on browser side, cannot use redirect
-    .then(result=>{
-        res.render('/comment');
-    })
-})
+
+
 //Edit Put request - how to enter this route?
-app.put("/:id/edit",(req, res)=>{
+app.post("/update/",(req, res)=>{
     console.log('entered put - debug me')
-    Comment.findByIdAndUpdate(req.params.id,req.body.comment,function(err,updatedata){
+    var update = Comment.findByIdAndUpdate(req.body.id,{
+        titl: req.body.titl,
+        snip: req.body.snip,
+        body: req.body.body
+    });
+    update.exec(function(err,data){
         if(err){
             console.log(err);
-            res.redirect("/");
+            res.redirect("/comment");
         }else{
-            res.redirect("/");
+            res.redirect("/comment");
         }
-    })
-})
+    });
+});
 
 app.post('/comment', (req, res)=>{
     const comment = new Comment(req.body);//this didn't parse it correctly?

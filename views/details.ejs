@@ -13,14 +13,15 @@
         <a class="delete" data-doc="<%= comment._id %>">Trash</a>
         <a class="edit" data-doc2="<%= comment._id %>">Edit</a>
         <div class="create-comment content">
-            <form action="/comment/<%=comment._id%>" method="PUT" class="editform" >
+            <form action="/update/" method="POST" class="editform" >
                 <!--need to fix method and route-->
+                <input type="hidden" name="id" value="<%= comment._id %>">
                 <label for="titl">Title*:</label>
-                <input type="text" id="titl" name="titl" required><br>
+                <input type="text" id="titl" name="titl" value="<%= comment.titl %>" required><br>
                 <label for="snip">Snippet*:</label>
-                <input type="text" id="snip" name="snip" required><br>
+                <input type="text" id="snip" name="snip" value="<%= comment.snip %>" required><br>
                 <label for="body">Body*:</label>
-                <textarea id="body" name="body" required></textarea><br>
+                <textarea id="body" name="body" value="<%= comment.body %>" required></textarea><br>
                 <button id="btn">Update This</button><!--need to add validation--><br>
                 <small>*Indicates a required field.</small>
                 <!--could actually save this info and fire an email from an smtp server-->
