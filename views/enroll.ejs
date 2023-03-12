@@ -5,18 +5,67 @@
     <h3>Enroll today!</h3>
     <p>A journey starts with one fraggle foot.</p><hr>
     <div class="create-comment content">
-        <form action="/enroll" method="POST" class="">
-            <label for="usrn">User Name*:</label>
+        <!--action="/enroll" method="POST" class=""-->
+        <form>
+
+            <label for="usrn">Email*:</label>
             <input type="text" id="usrn" name="usrn" required><br>
-            <label for="pswd">Snippet*:</label>
-            <input type="text" id="pswd" name="pswd" required><br>
-            <label for="auth">Faculty?*:</label>
-            <input id="auth" name="auth" required></input><br>
+            <div class="email error"></div>
+            <label for="hash">Password*:</label>
+            <input type="password" id="hash" name="hash" required><br>
+            <div class="password error"></div>
+            <label for="yous">Teacher or Student?*:</label>
+            <!--not using an input might create issues...-->
+            <select name="yous" id="yous">
+                <!--<option>Selection</option>//this should trigger the auth type being required and throwing an error message in models/login.js-->
+                <option value="S">Student</option>
+                <option value="T">Teacher</option>
+                
+            </select><br>
             <button>Create Login</button><!--need to add validation--><br>
             <small>*Indicates a required field.  Enter T for Teacher or S for Student in Faculty field.</small>
             <!--could actually save this info and fire an email from an smtp server-->
         </form>
+        <script>
+            //if auth.value="N" then throw error message and don't leave page.
+            const form = document.querySelector('form');
+            const urnmError = document.querySelector('.email.error');
+            const hashError = document.querySelector('.password.error');
+            form.addEventListener('submit', async (e)=>{
+                e.preventDefault();
+                urnmError.textContent='';
+                hashError.textContent='';
+                //get values
+                const usrn = form.usrn.value;
+                const hash = form.hash.value;
+                const yous = form.yous.value;
+
+                try {
+                    console.log('sending enrollment request');
+                    const res = await fetch('/enroll', {
+                        method: 'POST',
+                        body: JSON.stringify({usrn, hash, yous}),
+                        headers: { 'Content-Type': 'application/json'}
+                    });
+                    console.log('waiting on response');
+                    const data = await res.json();
+                    console.log('about to redirect');
+                    if(data.errors){
+                        urnmError.textContent = data.errors.usrn;
+                        hashError.textContent = data.errors.hash;
+                    }
+                    console.log('closer to redirect');
+                    console.log(data.login);
+                    if(data.login){
+                        location.assign('/');
+                    }
+                } catch (error) {
+                    
+                }
+            });
+        </script>
     </div>
+
     <%- include('./partials/foot.ejs') %>
 </body>
 </html>

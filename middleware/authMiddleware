@@ -1,0 +1,46 @@
+const jwt = require('jsonwebtoken');
+const Login = require('../models/login');
+
+const requireAuth=(req, res, next)=>{
+    const token = req.cookies.jwt;
+
+    //is there a JSON Web Token and is it unadultered?
+    if(token){
+        jwt.verify(token, 'team7rocks!', (erred, decodedToken)=>{
+            if(erred){
+                console.log(erred.message);
+                res.redirect('/loginDashboard');
+            }else{
+                console.log(decodedToken);
+                next();
+            }
+        })
+    }
+    else{
+        res.redirect('/loginDashboard');
+    }
+}
+
+// get the current user's info to use in cool places on views as view variables
+const checkLogin = (req, res, next) =>{
+    const token = req.cookies.jwt;
+    if(token){
+        jwt.verify(token, 'team7rocks!', async (erred, decodedToken)=>{
+            if(erred){
+                console.log(erred.message);
+                res.locals.login = null;
+                next();
+            }else{
+                console.log(decodedToken);
+                let login = await Login.findById(decodedToken.id);
+                res.locals.login = login;
+                next();
+            }
+        })
+
+    }else{
+        res.locals.login = null;
+        next();
+    }
+}
+module.exports = {requireAuth, checkLogin};
