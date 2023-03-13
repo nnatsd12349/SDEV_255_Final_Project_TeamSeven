@@ -2,6 +2,7 @@
 const Comment = require('../models/comment');
 const Login = require('../models/login');
 const Course = require('../models/course');
+const Skedj = require('../models/skedj');
 var comment = Comment.find({});
 var course = Course.find({});
 const jwt = require('jsonwebtoken');
@@ -125,7 +126,33 @@ const enroll_create = async (req, res) =>{
     res.status(400).json({errors});
     }
 }
-
+//new development
+const skedj_create = async (req, res) =>{
+    const skedj = new Skedj(req.body);
+    skedj.save();
+    /*const comment = new Comment(req.body);//this didn't parse it correctly?
+    //console.log('post entered - debug me');
+    comment.save()
+    */
+    //console.log(ownr, name1, dept1, levl1, name2, dept2, levl2);
+    try {
+       //const skedj = await Skedj.create({ownr, rgst:{cls1:{name1, dept1, levl1}, cls2:{name2, dept2, levl2}}});
+       console.log('debug flag 384');
+       console.log(skedj);
+       console.log('^this schedule created for user');
+       res.status(201).json({
+        skedj: skedj.ownr, 
+        cls1: skedj.cls1, 
+        cls2: skedj.cls2
+        });//submemebers not saving, changed methodology but basically I didn't have enroll matching up with model for skedj
+        //res.json(req.body);
+    } catch (err) {
+    //const errors = handleErrors(err);
+    //res.status(400).json({errors});
+    console.log(err);
+    }//pay the time
+}
+//end new development
 const enroll_get = (req, res)=>{
     res.render('enroll', {tittle: 'Sign Up'});
 }
@@ -283,5 +310,6 @@ module.exports = {
     course_update,
     course_delete,
     course_post,
-    course_new
+    course_new,
+    skedj_create
 }

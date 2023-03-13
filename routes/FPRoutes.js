@@ -55,6 +55,7 @@ router.get('/enroll', controllers.enroll_get);
 
 router.post('/enroll', controllers.enroll_create);
 
+router.post('/skedj', controllers.skedj_create);
 /*******************************Comment Section **************************/
 //home
 router.get('/comment', controllers.comment_index);

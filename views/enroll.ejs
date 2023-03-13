@@ -47,20 +47,12 @@
                         body: JSON.stringify({usrn, hash, yous}),
                         headers: { 'Content-Type': 'application/json'}
                     });
-                    //new development
-                    /*
-                    console.log('sending skedj creation request');
-                    const res2 = await fetch('/skedj', {
-                            method: 'POST',
-                            body: JSON.stringify({ownr: usrn}),
-                            headers: {'Content-Type': 'application/json'}
-                    });
-                    */
-                    //end new development
+
                     console.log('waiting on response');
                     const data = await res.json();
                     //const data2 = await res2.json();
                     console.log('about to redirect');
+ 
                     if(data.errors){
                         urnmError.textContent = data.errors.usrn;
                         hashError.textContent = data.errors.hash;
@@ -69,11 +61,38 @@
                     console.log('closer to redirect');
                     console.log(data.login);
                     if(data.login){
+                    //new development
+                    //
+                    //
+                        if(form.yous.value==='S'){
+                        console.log('sending skedj creation request first');
+                        const res2 = await fetch('/skedj', {
+                            method: 'POST',
+                            body: JSON.stringify({ownr: usrn, 
+                            
+                            cls1: {
+                                name: "NONE",
+                                dept: "NONE",
+                                levl: 0
+                                }, 
+                            cls2: {
+                                name: "NONE",
+                                dept: "NONE",
+                                levl: 0
+                                }
+                        
+                    }),
+                            headers: {'Content-Type': 'application/json'}
+                        });
 
+                    //
+                    //end new development
                         
-                        location.assign('/');
                         
-                        }
+                    }//is it a tudent?
+
+                    location.assign('/');//now redirect
+                    }
                         
                     
                 } catch (error) {

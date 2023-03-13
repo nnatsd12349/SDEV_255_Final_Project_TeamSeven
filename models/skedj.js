@@ -4,18 +4,17 @@ const Schema= mongoose.Schema;
 
 const skedjSchema = new Schema({
     ownr: { type: String },
-    rgst: { 
-        cls1: {
+    cls1: {
             name:{type: String},
-            dept:{type: Number},
+            dept:{type: String},
             levl:{type: Number}
-              },
-        cls2: {
+         },
+    cls2: {
             name:{type: String},
-            dept:{type: Number},
+            dept:{type: String},
             levl:{type: Number}
-              }
-    }
+        }
+    
 }, { timestamps: true });
 
 const Skedj = mongoose.model('Skedj', skedjSchema);
