@@ -187,11 +187,29 @@ const logout_get = (req, res)=>{//may need to do another way
   }
 
 
- const study_get = (req, res) =>{
+ const study_get = async(req, res) =>{
     //if no token redirect to login page
-    (console.log('study_get has been called'));
+    //need to get the one skedj that has owner == usrn of logged in user
+    //then pass that into the 
+    console.log('debug flag 3');
+        const token = req.cookies.jwt;
+        
+            const me = jwt.verify(token, 'team7rocks!', async (erred, decodedToken)=>{
+                    console.log(decodedToken);
+                    let login = await Login.findById(decodedToken.id);
+                    res.locals.login = login;
+                    console.log('debug here');
+                    console.log(login);
+                    return login;
+                   
+            })
+    
+    console.log('dbug flag 7');
+    
+    //Skedj.findOne({});
+    //it was all out here
     Course.find().sort({levl: 1})
-    .then((result)=>{
+    .then((result, sjedual)=>{
     res.render('studentHome', {tittle: 'Study', courses: result});
     })
     .catch((err)=>{
@@ -211,6 +229,7 @@ const logout_get = (req, res)=>{//may need to do another way
 };
 /***********************************COURSES SECTION*******************************************/
 const courses_get = (req, res)=>{
+
 Course.find().sort({levl: 1})
 .then((result)=>{
     res.render('courses', {tittle: 'Learn', courses: result});
