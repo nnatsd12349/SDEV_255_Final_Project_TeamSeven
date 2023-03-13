@@ -95,6 +95,60 @@
     .editform{
       display: none;
     }
+    
+
+    .cancel{
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .cancel:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+    }
+    .editT{
+      position: absolute;
+      top: 70;
+      right: 0;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .editT:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+    }
+    .purge{
+      position: absolute;
+      top: 140;
+      right: 0;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .purge:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.5);
+    }
+
+    .makeCourse{
+      position: absolute;
+      top: 730;
+      right: 5;
+      border-radius: 20%;
+      padding: 12px;
+      background-color: rgb(133, 170, 172);
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
+    .makeCourse:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(42, 110, 173, 2.9);
+    }
+
+
     .saySomeLink{
       float: right;
       border-radius: 50%;

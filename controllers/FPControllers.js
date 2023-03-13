@@ -3,6 +3,7 @@ const Comment = require('../models/comment');
 const Login = require('../models/login');
 const Course = require('../models/course');
 var comment = Comment.find({});
+var course = Course.find({});
 const jwt = require('jsonwebtoken');
 
 //amazing Error Handler of awesome, thank you NetNinja
@@ -161,13 +162,26 @@ const logout_get = (req, res)=>{//may need to do another way
 
  const study_get = (req, res) =>{
     //if no token redirect to login page
-    res.render('studentHome', {tittle: 'Study'});
+    (console.log('study_get has been called'));
+    Course.find().sort({levl: 1})
+    .then((result)=>{
+    res.render('studentHome', {tittle: 'Study', courses: result});
+    })
+    .catch((err)=>{
+    console.log(err);
+    });
  };
  
  const teach_get = (req, res) =>{
     //if no token redirect to login page
-    res.render('teacherHome', {tittle: 'Teach'});
- };
+    Course.find().sort({levl: 1})
+    .then((result)=>{
+    res.render('teacherHome', {tittle: 'Learn', courses: result});
+    })
+    .catch((err)=>{
+    console.log(err);
+    });
+};
 /***********************************COURSES SECTION*******************************************/
 const courses_get = (req, res)=>{
 Course.find().sort({levl: 1})
@@ -178,24 +192,74 @@ Course.find().sort({levl: 1})
     console.log(err);
 });
 }
+////CURRENT WORK HERE
+const course_details = (req, res)=>{
+    console.log('get entered by id - debug me')
+    const id = req.params.id;
+     Course.findById(id)
+    .then(result=>{
+        res.render('courseDetails', { course: result, tittle: 'Browse'});
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+    }
+    
 
 const course_post = (req, res)=>{
     const course = new Course({
-        name: 'change me',
-        desc: 'change my text and go to my url to insert into db.',
-        dept: 'DBDB',
-        levl: 147,
-        preq: 1,
-        cred: 4
+        name: req.body.name,
+        desc: req.body.desc,
+        dept: req.body.dept,
+        //add a sylb to the course model to add syllabus info
+        levl: req.body.levl,
+        preq: req.body.preq,
+        cred: req.body.cred
     });
     course.save()
-        .then((result)=>{
-            res.send(result)
-        }).catch((err)=>{
-            console.log(err);
-        });
+    .then((result)=>{
+        res.redirect('/teacherHome');
+    }).catch((err)=>{
+        console.log(err);
+    }).catch(err=>{
+        console.log(err);
+    })
 };
 
+
+const course_update = (req, res)=>{
+    console.log('entered put - debug me')
+    var updateC = Course.findByIdAndUpdate(req.body.id,{
+        name: req.body.name,
+        desc: req.body.desc,
+        dept: req.body.dept,
+        levl: req.body.levl,
+        preq: req.body.preq,
+        cred: req.body.cred
+    });
+    updateC.exec(function(err,data){
+        if(err){
+            console.log(err);
+            res.redirect("/teacherHome");
+        }else{
+            res.redirect("/teacherHome");
+        }
+    });
+}
+
+const course_new = (req, res)=>{//may need to do another way
+    console.log('teacher making new course');
+    res.render('newCourseForm');
+  }
+
+const course_delete = (req, res)=>{
+    const id = req.params.id;
+    Course.findByIdAndDelete(id)
+    //because AJAX request on browser side, cannot use redirect
+    .then(result=>{
+        res.json({redirect: '/teacherHome'})
+    })
+}
 /***************************** COURSES ***************************************/
 
 
@@ -214,5 +278,10 @@ module.exports = {
     login_post,//try authenticate
     study_get,
     teach_get,
-    logout_get//clears jwt and redirects to home page
+    logout_get,//clears jwt and redirects to home page
+    course_details,
+    course_update,
+    course_delete,
+    course_post,
+    course_new
 }

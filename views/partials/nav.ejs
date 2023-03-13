@@ -4,12 +4,25 @@
     </div>
     <img src="../public/assets/logo.jpg" height="50px" width="50px" alignment="right">
     <div id="nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/courses">Courses</a></li>
-                <li><a href="/loginDashboard">Login</a></li>
-                <li><a href="/comment">Comment</a></li>
-                <li><a href="/enroll">Enroll</a></li>
+             <% if (login){%>
+                <li>Welcome, <%=login.usrn%></li>
+                <% if (login.yous === "S"){%>
+                    <li><a href="/studentHome"><u>Classes</u></a></li>
+                <%}else{ %>
+                    <li><a href="/teacherHome"><u>Instruct</u></a></li>
+                <%}%>
+
                 <li><a href="/logout">Logout</a></li>
+                <%}else{ %>
+                <li><a href="/loginDashboard">Login</a></li>
+                <li><a href="/enroll">Enroll</a></li>
+                <%}%>
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/comment">Comment</a></li>
+            
+                
             </ul>
         </div>
 </nav>

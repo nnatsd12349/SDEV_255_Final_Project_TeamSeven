@@ -2,7 +2,7 @@ const express = require('express');
 const _ = require('lodash');
 const router = express.Router();
 const controllers = require('../controllers/FPControllers');
-
+const {requireAuth, checkLogin} = require('../middleware/authMiddleware');
 
 
 
@@ -26,15 +26,15 @@ router.get('/', (req, res) =>{
 
 // this page is just a list of courses
 router.get('/courses', controllers.courses_get);
-
+router.get('/courses/:id', controllers.course_details);
 //this route will be called by teacherHome to make a course with a form
 router.get('/add-course', controllers.course_post);//yes this one is singular
+router.post("/updateC/", controllers.course_update);
+router.delete('/courses/:id', controllers.course_delete);
 
+router.get('/newCourseForm', controllers.course_new);
 
-router.get('/enroll', controllers.enroll_get);
-
-router.post('/enroll', controllers.enroll_create);
-
+router.post('/courses', controllers.course_post);
 
 
 
@@ -44,12 +44,16 @@ router.get('/loginDashboard', controllers.login_get);
 router.post('/loginDashboard', controllers.login_post);//see if can authenticate
 
 /**these may not even be needed here, they might be nested in ... oh they will be needed... */
-router.get('/studentHome', controllers.study_get);
+router.get('/studentHome', requireAuth, controllers.study_get);
 
 
-router.get('/teacherHome', controllers.teach_get);
+router.get('/teacherHome', requireAuth, controllers.teach_get);
 
 router.get('/logout', controllers.logout_get);
+
+router.get('/enroll', controllers.enroll_get);
+
+router.post('/enroll', controllers.enroll_create);
 
 /*******************************Comment Section **************************/
 //home
@@ -62,7 +66,7 @@ router.get('/comment/:id', controllers.comment_details);
 router.delete('/comment/:id', controllers.comment_delete);
 
 //This is the Update functionality
-router.post("/update/", controllers.comment_update);
+router.post("/updateW/", controllers.comment_update);
 
 //make new comment
 router.post('/comment', controllers.comment_create);

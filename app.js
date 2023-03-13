@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const {requireAuth} = require('./middleware/authMiddleware');
+const {requireAuth, checkLogin} = require('./middleware/authMiddleware');
 
 
 
@@ -33,10 +33,10 @@ app.use(express.urlencoded({extended: true}));//had error for parsing models wit
 app.use(morgan('dev'));
 
 
-
+app.get('*', checkLogin);
 //middleware to load css
 app.use('/public', express.static('public'));
-app.get('/studentHome', requireAuth, (req, res)=> res.render('studentHome'));
-app.get('/teacherHome', requireAuth, (req, res)=> res.render('teacherHome'));
+//app.get('/studentHome', requireAuth, (req, res)=> res.render('studentHome'));
+//app.get('/teacherHome', requireAuth, (req, res)=> res.render('teacherHome'));
 //all the routes are now in /routes
 app.use(FPRoutes);

@@ -1,0 +1,73 @@
+<html>
+   
+<body>
+    <!--This styles.css needs double dot to say parent parent directory becuase it is relative to inside /blargs with single dot-->
+    <link rel="StyleSheet" href="../public/assets/stylesheet.css">
+    <div class="details content">
+        <h2><center>Create New Course Form</center></h2>
+        <h3 align="center" style="color:firebrick"><u>Only enter only information only approved by only your dean!</u></h4>
+        <div>
+            <p style="color:firebrick" align="center"><b>Do not hit your back or forward browser buttons or navigate away from this page until complete!</b></p>
+            
+        </div>
+        <div class="create-comment content">
+            <form action="/courses" method="POST" class="makeform" >
+                <!--need to fix method and route-->
+                
+                <label for="name">Name*:</label>
+                <input type="text" id="name" name="name" value="" required><br>
+
+                <label for="desc">Description*:</label>
+                <input type="text" id="desc" name="desc" value="" required><br>
+                
+                <label for="cred">Credits*:</label>
+                <input type="number" id="cred" name="cred" value="0" required><br>
+                
+                <label for="dept" for="preq">Department and prerequisites?</label>
+                <select name="dept" id="dept">
+                    <!--<option>Selection</option>//this should trigger the auth type being required and throwing an error message in models/login.js-->
+                    <option value="CSIA">Cyber Security</option>
+                    <option value="PHIL">Philosophy</option>
+                    <option value="MUSC">Music Theory</option>
+                    <option value="CSCI">Computer Science</option>
+                    <option value="SDEV">Software Development</option>
+                    <option value="MISC">Miscellaneous</option>
+                    <option value="HIST">History</option>
+                    <option value="FRTH">Fragglethropology</option>
+                    <option value="PLAY">Recreation</option>
+                    <option value="ASTR">Astronomy</option>
+                                       
+                </select>
+
+                <select name="preq" id="preq">
+                    <!--<option>Selection</option>//this should trigger the auth type being required and throwing an error message in models/login.js-->
+                    <option value="0">False</option>
+                    <option value="1">True</option>                                       
+                </select>
+
+                <label for="levl">Level Designation:</label>
+                <input type="number" id="levl" name="levl" value="000" required><br>
+
+                <button id="btn">Create New Course</button><!--need to add validation--><br>
+                <p style="color:firebrick"><b>All fields are required!</b></p>
+                <!--could actually save this info and fire an email from an smtp server-->
+            </form>
+        </div>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+    <script>
+
+
+        const whiteboard= document.querySelector('a.edit');
+        const editform = document.querySelector('form.editform');
+        editform.style.display = 'none';
+        //this is now working exactly like I wanted: shows the updating form
+        whiteboard.addEventListener('click', ()=>{
+            
+           
+        })
+    </script>
+   
+
+</body>
+</html>

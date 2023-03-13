@@ -1,0 +1,115 @@
+<html>
+   <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <!--This styles.css needs double dot to say parent parent directory becuase it is relative to inside /blargs with single dot-->
+    <link rel="StyleSheet" href="../public/assets/stylesheet.css">
+    <div class="details content">
+        <h2><u><%= course.name %></u></h2>
+        <h4><%= course.desc %></h4>
+        <div>
+            <p><%= course.dept %></p>
+        </div>
+        <a class="purge" data-doc="<%= course._id %>">Purge</a>
+        <a class="editT" data-doc2="<%= course._id %>">Edit</a>
+        <a class="cancel" data-doc3="<%= course._id %>">Cancel</a>
+        <div class="create-course content">
+            <form action="/updateC/" method="POST" class="editform" >
+                <!--need to fix method and route-->
+                <input type="hidden" name="id" value="<%= course._id %>">
+                <label for="name">Name*:</label>
+                <input type="text" id="name" name="name" value="<%= course.name %>" required><br>
+
+                <label for="desc">Description*:</label>
+                <input type="text" id="desc" name="desc" value="<%= course.desc %>" required><br>
+                
+                <label for="cred">Credits*:</label>
+                <input type="number" id="cred" name="cred" value="<%= course.cred %>" required><br>
+                
+                <label for="dept" for="preq">Department and prerequisites?</label>
+                <select name="dept" id="dept" value = "<%= course.dept %>"">
+                    <!--<option>Selection</option>//this should trigger the auth type being required and throwing an error message in models/login.js-->
+                    <option value="CSIA">Cyber Security</option>
+                    <option value="PHIL">Philosophy</option>
+                    <option value="MUSC">Music Theory</option>
+                    <option value="CSCI">Computer Science</option>
+                    <option value="SDEV">Software Development</option>
+                    <option value="MISC">Miscellaneous</option>
+                    <option value="HIST">History</option>
+                    <option value="FRTH">Fragglethropology</option>
+                    <option value="PLAY">Recreation</option>
+                    <option value="ASTR">Astronomy</option>
+                                       
+                </select>
+
+                <select name="preq" id="preq" value="<%= course.preq %>"">
+                    <!--<option>Selection</option>//this should trigger the auth type being required and throwing an error message in models/login.js-->
+                    <option value="0">False</option>
+                    <option value="1">True</option>                                       
+                </select>
+
+                <label for="levl">Level Designation:</label>
+                <input type="number" id="levl" name="levl" value="<%= course.levl %>" required><br>
+
+                <p style="color:firebrick"><b>All fields are required!</b></p>
+                <button id="btn">Update Course</button><!--need to add validation--><br>
+                <small>*Indicates a required field.</small>
+                <!--could actually save this info and fire an email from an smtp server-->
+            </form>
+        </div>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+    <script>
+        const trashcan = document.querySelector('a.purge');
+        trashcan.addEventListener('click', (e)=>{
+            const endpoint=`/courses/${trashcan.dataset.doc}`;//not single quotes, these are back ticks below the esc key
+            //this thing right here is ^^^ called a template string
+            //because this is rendered and passed back from client-side it is called AJAX
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response)=>response.json())
+            //.then((data)=>console.log(data))
+            .then((data)=>window.location.href = data.redirect)
+            .catch(err=>console.log(err));
+            console.log('clicked-eventhandleractive');
+        })
+        const cancelEdit = document.querySelector('a.cancel');
+        cancelEdit.addEventListener('click', (e)=>{
+            location.assign('/teacherHome');
+        })
+
+        const whiteboard= document.querySelector('a.editT');
+        const editform = document.querySelector('form.editform');
+        
+        //this is now working exactly like I wanted: shows the updating form
+        whiteboard.addEventListener('click', ()=>{
+            
+            if(editform.style.display != 'block'){
+                editform.style.display = 'block';
+            }else{
+                editform.style.display = 'none';
+            }
+            console.log('clicked - debug me')
+        })
+/*this didn't work, but I will leave it here incase I get frustrated with new method
+        const change = document.querySelector('button.btn');
+        change.addEventListener('click', (e)=>{
+            const endpoint=`/course/${change.dataset.doc2}`;//not single quotes, these are back ticks below the esc key
+            //this thing right here is ^^^ called a template string
+            //because this is rendered and passed back from client-side it is called AJAX
+            fetch(endpoint, {
+                method: 'PUT'
+            })
+            .then((response)=>response.json())
+            //.then((data)=>console.log(data))
+            .then((data)=>window.location.href = data.redirect)
+            .catch(err=>console.log(err));
+            console.log('clicked-eventhandleractive');
+        })
+        **/
+    </script>
+   
+
+</body>
+</html>

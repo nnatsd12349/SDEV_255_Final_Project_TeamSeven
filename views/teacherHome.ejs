@@ -119,13 +119,36 @@
             </div>
         </nav>-->
 
-       
+        
 
-        //teacher can CREATE course, DELETE course (from explore)(popup alert: confirm/cancel)<br>
-        //basically administrative api access to database<br>
-        //button to login to add courses or exercise faculty adminstrative functions such as CREATE, UPDATE, or DELETE courses
+        <span style="color:crimson">CAUTION:</span> Select a course to view details and/or edit or purge from system.  <br>
+        <a class="makeCourse" align="right">Create Course</a><br>
+        <div class="courselist">
+            <table>
+                <tr><center><h4>Update Inventory of Degree Program Courses</h4></center></tr>
+                <tr><td> </td><td> </td><td>Dept</td><td>Level</td><td>Preqs</td><td>Credits</td><hr></tr>
+        <% if (courses.length > 0 ) { %>
+            <% courses.forEach(course => { %>
+               <tr><td><a href="/courses/<%= course._id %>"><u> <%=course.name%>:</u></a></td></tr>
+                    <tr><td><p><%=course.desc%></p></td></tr>
+                    <td><hr></td><td><hr></td><td><%=course.dept%>,<hr></td><td><%=course.levl%>,<hr></td><td><%=course.preq%>,<hr></td><td><%=course.cred%><hr></td>
+                </tr>
+                <% }) %>
+            <% } else { %>
+                    <p>There are no database courses to display...</p>
+                <% } %><!--EJS does serverside rendering of dynamic pages-->
+                <!--Need to update route-->
+            </table>
+            </div>
     </div>
-
+    <script>
+        const makeClass = document.querySelector('a.makeCourse');
+        makeClass.addEventListener('click', (e)=>{
+            alert('Navigation will be diabled until you complete the form.');
+            location.assign('/newCourseForm');
+            console.log('heading over');
+        })
+    </script>
     <%- include('./partials/foot.ejs') %>
 </body>
     

@@ -118,13 +118,22 @@
                 </ul>
             </div>
         </nav>-->
-
-        
-
-        //load iframe for scheduled, explore, past grades<br>
-        //send to enroll page if select enroll (explore page with add course to scheduled)<br>
-        //Checkout - use test payment processor API to pay for classes?  (too much work?)<br>
-        //student landing page can add course to self and save changes or drop course and save changes
+        <div class="courselist">
+            <table>
+                <tr><center><h3>Database Inventory of Degree Program Courses</h3></center></tr>
+                <tr><td> </td><td> </td><td>Dept</td><td>Level</td><td>Preqs</td><td>Credits</td><hr></tr>
+        <% if (courses.length > 0 ) { %>
+            <% courses.forEach(course => { %>
+               <tr><td><%=course.name%>:</td></tr>
+                    <tr><td><p><%=course.desc%></p></td></tr>
+                    <td><hr></td><td><hr></td><td><%=course.dept%>,<hr></td><td><%=course.levl%>,<hr></td><td><%=course.preq%>,<hr></td><td><%=course.cred%><hr></td>
+                </tr>
+                <% }) %>
+            <% } else { %>
+                    <p>There are no database courses to display...</p>
+                <% } %><!--EJS does serverside rendering of dynamic pages-->
+            </table>
+            </div>
     </div>
     
     <%- include('./partials/foot.ejs') %>

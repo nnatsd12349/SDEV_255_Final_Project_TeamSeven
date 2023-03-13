@@ -131,8 +131,9 @@
                     console.log('closer to redirect');
                     console.log(data.login);
                     if(data.login){
+                        alert ("Your session will expire in two hours. \n Then you will need to log in again.");
                         if(data.type=='S'){
-                          location.assign('/studentHome');}
+                            location.assign('/studentHome');}
                         else if(data.type=='T'){
                             location.assign('/teacherHome');
                         }else{

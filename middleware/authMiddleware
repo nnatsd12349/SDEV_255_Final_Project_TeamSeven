@@ -11,6 +11,7 @@ const requireAuth=(req, res, next)=>{
                 console.log(erred.message);
                 res.redirect('/loginDashboard');
             }else{
+                
                 console.log(decodedToken);
                 next();
             }

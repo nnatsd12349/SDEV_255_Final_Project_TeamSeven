@@ -13,7 +13,7 @@
         <a class="delete" data-doc="<%= comment._id %>">Trash</a>
         <a class="edit" data-doc2="<%= comment._id %>">Edit</a>
         <div class="create-comment content">
-            <form action="/update/" method="POST" class="editform" >
+            <form action="/updateW/" method="POST" class="editform" >
                 <!--need to fix method and route-->
                 <input type="hidden" name="id" value="<%= comment._id %>">
                 <label for="titl">Title*:</label>
