@@ -194,13 +194,14 @@ const logout_get = (req, res)=>{//may need to do another way
     console.log('debug flag 3');
         const token = req.cookies.jwt;
         
-            const me = jwt.verify(token, 'team7rocks!', async (erred, decodedToken)=>{
+            const mySkedj = await jwt.verify(token, 'team7rocks!', async (erred, decodedToken)=>{
                     console.log(decodedToken);
                     let login = await Login.findById(decodedToken.id);
                     res.locals.login = login;
                     console.log('debug here');
                     console.log(login);
-                    return login;
+                    const me = await Skedj.findOne({ownr: login.usrn})
+                    return me;
                    
             })
     
@@ -208,9 +209,10 @@ const logout_get = (req, res)=>{//may need to do another way
     
     //Skedj.findOne({});
     //it was all out here
+    console.log(mySkedj);
     Course.find().sort({levl: 1})
     .then((result, sjedual)=>{
-    res.render('studentHome', {tittle: 'Study', courses: result});
+    res.render('studentHome', {tittle: 'Study', courses: result, classes: mySkedj});
     })
     .catch((err)=>{
     console.log(err);

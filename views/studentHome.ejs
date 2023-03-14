@@ -102,9 +102,33 @@
     <!--header/link to homepage-->
     <header>
         <h1 class="hlink">Student Home Page</h1>
+        <style>
+        #tableClasses
+        #tableClasses{
+            border-collapse: separate;
+            border-spacing: 0 15px;
+          }
+          
+          #tableClasses th {
+            background-color: #4287f5;
+            color: white;
+          }
+          
+          #tableClasses th,
+          #tableClasses td {
+            width: 300px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+          }
+        
+        </style>
     </header>
-    <h3></h3>
-
+    <table id="tableClasses">
+        <tr><td>Slots</td><td>Name</td><td>Department</td><td>Credits Earnable</td><td>Action</td></tr>
+        <tr><td>Course 1:  </td><td><h3><%=classes.cls1.name%></h3></td><td><%=classes.cls1.dept%></td><td><%=classes.cls1.levl%></td><td><u><a href="">DROP</a></u></td></tr>
+        <tr><td>Course 2:  </td><td><h3><%=classes.cls2.name%></h3></td><td><%=classes.cls2.dept%></td><td><%=classes.cls2.levl%></td><td><u><a href="">DROP</a></u></td></tr>
+    </table>
     <div id="wrap"><!--Division in webpage-->
 
         <!--Navigation links for different webpages on website
@@ -127,8 +151,9 @@
             <% courses.forEach(course => { %>
                <tr><td><%=course.name%>:</td></tr>
                     <tr><td><p><%=course.desc%></p></td></tr>
-                    <td><hr></td><td><hr></td><td><%=course.dept%>,<hr></td><td><%=course.levl%>,<hr></td><td><%=course.preq%>,<hr></td><td><%=course.cred%><hr></td>
+                    <td><hr></td><td><hr></td><td><%=course.dept%>,<hr></td><td><%=course.levl%>,<hr></td><td><%=course.preq%>,<hr></td><td><%=course.cred%><hr></td><td><u><a href="">Course 1 Overwrite</a></u></td><td><u><a href="">Course 2 Overwrite</a></u></td>
                 </tr>
+                
                 <% }) %>
             <% } else { %>
                     <p>There are no database courses to display...</p>
